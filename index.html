@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FS Ride - Travel Billing System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <!-- Logo/Brand -->
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>FS Ride</h1>
+                        <p>Travel Billing System</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#invoices" class="nav-item" data-page="invoices">
+                    <i class="fas fa-file-invoice"></i>
+                    <span>Invoices</span>
+                </a>
+                <a href="#expenses" class="nav-item" data-page="expenses">
+                    <i class="fas fa-receipt"></i>
+                    <span>Expenses</span>
+                </a>
+                <a href="#clients" class="nav-item" data-page="clients">
+                    <i class="fas fa-users"></i>
+                    <span>Clients</span>
+                </a>
+                <a href="#analytics" class="nav-item" data-page="analytics">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analytics</span>
+                </a>
+            </div>
+
+            <!-- Settings & Theme -->
+            <div class="sidebar-footer">
+                <button class="settings-btn">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div class="page active" id="dashboard">
+                <!-- Header -->
+                <header class="page-header">
+                    <div class="floating-shape shape-1"></div>
+                    <div class="floating-shape shape-2"></div>
+                    
+                    <div class="header-content">
+                        <div class="header-text">
+                            <h1>Dashboard</h1>
+                            <p>Welcome to FS Ride Travel Billing System</p>
+                        </div>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" onclick="openModal('clientModal')">
+                                <i class="fas fa-plus"></i>
+                                Add Client
+                            </button>
+                            <button class="btn btn-primary" onclick="openModal('expenseModal')">
+                                <i class="fas fa-plus"></i>
+                                Add Expense
+                            </button>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-download"></i>
+                                Export
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card blue" data-stat="invoices">
+                        <div class="stat-background">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <p class="stat-label">Total Invoices</p>
+                                <p class="stat-value" id="totalInvoices">0</p>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                        </div>
+                        <div class="stat-progress"></div>
+                    </div>
+
+                    <div class="stat-card green" data-stat="revenue">
+                        <div class="stat-background">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <p class="stat-label">Total Revenue</p>
+                                <p class="stat-value" id="totalRevenue">₹0</p>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                        </div>
+                        <div class="stat-progress"></div>
+                    </div>
+
+                    <div class="stat-card purple" data-stat="distance">
+                        <div class="stat-background">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <p class="stat-label">Total Distance</p>
+                                <p class="stat-value" id="totalDistance">0 km</p>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                        </div>
+                        <div class="stat-progress"></div>
+                    </div>
+
+                    <div class="stat-card amber" data-stat="clients">
+                        <div class="stat-background">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <p class="stat-label">Active Clients</p>
+                                <p class="stat-value" id="activeClients">0</p>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                        <div class="stat-progress"></div>
+                    </div>
+                </div>
+
+                <!-- Invoice Form -->
+                <div class="invoice-section">
+                    <div class="section-header">
+                        <h2>Create New Invoice</h2>
+                        <p>Generate professional invoices with GST calculations</p>
+                    </div>
+                    
+                    <form class="invoice-form" id="invoiceForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Client</label>
+                                <select id="clientSelect" required>
+                                    <option value="">Select a client</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Invoice Date</label>
+                                <input type="date" id="invoiceDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Due Date</label>
+                                <input type="date" id="dueDate">
+                            </div>
+                            <div class="form-group">
+                                <label>GST Type</label>
+                                <select id="gstType" required>
+                                    <option value="cgst_sgst">CGST + SGST</option>
+                                    <option value="igst">IGST</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Invoice Items -->
+                        <div class="invoice-items">
+                            <h3>Items</h3>
+                            <div class="items-container" id="itemsContainer">
+                                <div class="item-row">
+                                    <input type="text" placeholder="Description" class="item-description" required>
+                                    <input type="number" placeholder="Qty" class="item-quantity" min="1" required>
+                                    <input type="number" placeholder="Rate" class="item-rate" step="0.01" required>
+                                    <input type="number" placeholder="Amount" class="item-amount" readonly>
+                                    <button type="button" class="remove-item" onclick="removeItem(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline" onclick="addItem()">
+                                <i class="fas fa-plus"></i>
+                                Add Item
+                            </button>
+                        </div>
+
+                        <!-- Invoice Summary -->
+                        <div class="invoice-summary">
+                            <div class="summary-row">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">₹0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>CGST (9%):</span>
+                                <span id="cgst">₹0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>SGST (9%):</span>
+                                <span id="sgst">₹0.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total:</span>
+                                <span id="total">₹0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                Save Invoice
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="generatePDF()">
+                                <i class="fas fa-file-pdf"></i>
+                                Generate PDF
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Other Pages -->
+            <div class="page" id="invoices">
+                <header class="page-header">
+                    <div class="header-content">
+                        <div class="header-text">
+                            <h1>Invoices</h1>
+                            <p>Manage your invoices and billing</p>
+                        </div>
+                    </div>
+                </header>
+                <div class="coming-soon">
+                    <i class="fas fa-file-invoice"></i>
+                    <h2>Invoices Management</h2>
+                    <p>View and manage all your invoices</p>
+                </div>
+            </div>
+
+            <div class="page" id="expenses">
+                <header class="page-header">
+                    <div class="header-content">
+                        <div class="header-text">
+                            <h1>Expenses</h1>
+                            <p>Track your travel expenses</p>
+                        </div>
+                    </div>
+                </header>
+                <div class="coming-soon">
+                    <i class="fas fa-receipt"></i>
+                    <h2>Expense Tracking</h2>
+                    <p>Monitor and categorize your expenses</p>
+                </div>
+            </div>
+
+            <div class="page" id="clients">
+                <header class="page-header">
+                    <div class="header-content">
+                        <div class="header-text">
+                            <h1>Clients</h1>
+                            <p>Manage your client information</p>
+                        </div>
+                    </div>
+                </header>
+                <div class="coming-soon">
+                    <i class="fas fa-users"></i>
+                    <h2>Client Management</h2>
+                    <p>Add and manage client details</p>
+                </div>
+            </div>
+
+            <div class="page" id="analytics">
+                <header class="page-header">
+                    <div class="header-content">
+                        <div class="header-text">
+                            <h1>Analytics</h1>
+                            <p>Business insights and reports</p>
+                        </div>
+                    </div>
+                </header>
+                <div class="coming-soon">
+                    <i class="fas fa-chart-bar"></i>
+                    <h2>Analytics Dashboard</h2>
+                    <p>View business performance metrics</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="clientModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Client</h2>
+                <button class="modal-close" onclick="closeModal('clientModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" id="clientForm">
+                <div class="form-group">
+                    <label>Client Name</label>
+                    <input type="text" id="clientName" required>
+                </div>
+                <div class="form-group">
+                    <label>Contact Person</label>
+                    <input type="text" id="contactPerson">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="clientEmail">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="clientPhone">
+                </div>
+                <div class="form-group">
+                    <label>GSTIN</label>
+                    <input type="text" id="clientGstin">
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea id="clientAddress" rows="3"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('clientModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Client</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="expenseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Expense</h2>
+                <button class="modal-close" onclick="closeModal('expenseModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" id="expenseForm">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="expenseTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="number" id="expenseAmount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="expenseCategory" required>
+                        <option value="">Select category</option>
+                        <option value="fuel">Fuel</option>
+                        <option value="food">Food</option>
+                        <option value="accommodation">Accommodation</option>
+                        <option value="maintenance">Maintenance</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="expenseDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="expenseDescription" rows="3"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('expenseModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Expense</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download FS Ride Dashboard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1e40af;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        .description {
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .download-section {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        .file-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .file-icon {
+            width: 20px;
+            height: 20px;
+            color: #3b82f6;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .feature {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .feature h3 {
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+        .instructions {
+            background: #fef3c7;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚗 FS Ride Dashboard</h1>
+        <p class="description">
+            Your complete animated travel billing system is ready for download! This standalone version includes 
+            beautiful animations, dark/light themes, and full offline functionality.
+        </p>
+
+        <div class="download-section">
+            <h2>📦 Download Complete Package</h2>
+            <p>Get all files in one compressed archive:</p>
+            <a href="fs-ride-dashboard.tar.gz" class="download-btn" download>
+                Download fs-ride-dashboard.tar.gz (13 KB)
+            </a>
+        </div>
+
+        <div class="download-section">
+            <h2>📄 Individual Files</h2>
+            <ul class="file-list">
+                <li>
+                    <div class="file-info">
+                        <span class="file-icon">🌐</span>
+                        <span>index.html - Main application file</span>
+                    </div>
+                    <a href="index.html" class="download-btn" download>Download</a>
+                </li>
+                <li>
+                    <div class="file-info">
+                        <span class="file-icon">🎨</span>
+                        <span>styles.css - Beautiful animations & styling</span>
+                    </div>
+                    <a href="styles.css" class="download-btn" download>Download</a>
+                </li>
+                <li>
+                    <div class="file-info">
+                        <span class="file-icon">⚡</span>
+                        <span>script.js - Full functionality & interactions</span>
+                    </div>
+                    <a href="script.js" class="download-btn" download>Download</a>
+                </li>
+                <li>
+                    <div class="file-info">
+                        <span class="file-icon">📖</span>
+                        <span>README.md - Setup & usage instructions</span>
+                    </div>
+                    <a href="README.md" class="download-btn" download>Download</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="instructions">
+            <h3>🚀 Quick Start</h3>
+            <ol>
+                <li>Download the complete package or individual files</li>
+                <li>Extract the archive (if downloaded)</li>
+                <li>Open <code>index.html</code> in any modern web browser</li>
+                <li>Start managing your travel billing with beautiful animations!</li>
+            </ol>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <h3>🎬 Animated Dashboard</h3>
+                <p>Smooth card animations, floating shapes, and interactive hover effects</p>
+            </div>
+            <div class="feature">
+                <h3>📊 Invoice Generation</h3>
+                <p>Professional invoices with GST calculations (CGST, SGST, IGST)</p>
+            </div>
+            <div class="feature">
+                <h3>👥 Client Management</h3>
+                <p>Add and manage client information with animated forms</p>
+            </div>
+            <div class="feature">
+                <h3>💼 Expense Tracking</h3>
+                <p>Monitor travel expenses by category with visual feedback</p>
+            </div>
+            <div class="feature">
+                <h3>🌙 Dark/Light Theme</h3>
+                <p>Toggle between themes with smooth transitions</p>
+            </div>
+            <div class="feature">
+                <h3>📱 Responsive Design</h3>
+                <p>Perfect on all devices with touch-friendly interactions</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #64748b;">
+            <p>Built with ❤️ using pure HTML, CSS, and JavaScript</p>
+        </div>
+    </div>
+</body>
+</html>
